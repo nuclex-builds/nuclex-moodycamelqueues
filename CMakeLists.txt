@@ -47,17 +47,17 @@ endif()
 
 # -------------------------------------------------------------------------------------------------
 
-#configure_file(
-#	"${PROJECT_SOURCE_DIR}/example.h"
-#	"${PROJECT_SOURCE_DIR}/build-concurrentqueue/include/moodycamelqueues/"
-#	COPYONLY
-#)
+configure_file(
+	"${PROJECT_SOURCE_DIR}/dummy.cpp"
+	"${PROJECT_SOURCE_DIR}/build-concurrentqueue/"
+	COPYONLY
+)
 
 # -------------------------------------------------------------------------------------------------
 
 set(
 	sourceFiles
-	""
+	"build-concurrentqueue/dummy.cpp"
 )
 set(
 	headerFiles
@@ -74,13 +74,12 @@ add_library(MoodyCamelQueues::Static ALIAS MoodyCamelQueues)
 
 target_compile_definitions(
 	MoodyCamelQueues
-	PUBLIC MOODYCAMELQUEUES_STATIC
 	PRIVATE MOODYCAMELQUEUES_EXPORTS
 )
 
 target_include_directories(
 	MoodyCamelQueues
-	PUBLIC "build/include"
+	INTERFACE "build-concurrentqueue"
 )
 
 target_sources(
@@ -94,10 +93,12 @@ set_target_properties(MoodyCamelQueues PROPERTIES OUTPUT_NAME "moodycamelqueues"
 
 # -------------------------------------------------------------------------------------------------
 
-install(
-	TARGETS MoodyCamelQueues
-	ARCHIVE	DESTINATION ${PROJECT_SOURCE_DIR}/bin/${NUCLEX_COMPILER_TAG}
-)
+# Nothing to install, this is a header-only library as long as we're
+# not using its C wrapper
+#install(
+#	TARGETS MoodyCamelQueues
+#	ARCHIVE	DESTINATION ${PROJECT_SOURCE_DIR}/bin/${NUCLEX_COMPILER_TAG}
+#)
 
 # -------------------------------------------------------------------------------------------------
 
