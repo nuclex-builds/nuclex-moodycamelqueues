@@ -1,0 +1,5 @@
+[submodule "build-concurrentqueue"]
+	path = build-concurrentqueue
+	url = ../../cameron314/concurrentqueue.git
+	branch = master
+	update = rebase
